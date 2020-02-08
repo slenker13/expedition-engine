@@ -13,14 +13,20 @@ namespace Expedition {
             // Delete window
             void free();
 
-            // Create renderer from window
-            bool createRenderer();
-
             // Handle window events
             void handleEvent(SDL_Event& e);
 
             // Get renderer
             SDL_Renderer* getRenderer();
+
+            // Focus on the window
+            void focus();
+
+            // Clear window contents
+            void clearScreen();
+
+            // Draw window contents
+            void render();
 
             // Window dimensions
             int getWidth();
@@ -29,13 +35,13 @@ namespace Expedition {
             //  Window focii
             bool hasMouseFocus();
             bool hasKeyboardFocus();
+            bool isFullscreen();
             bool isMinimized();
+            bool isShown();
 
         private:
             // Window data
             SDL_Window* m_window;
-
-            // Window renderer
             SDL_Renderer* m_renderer;
 
             // Window dimensions
@@ -47,5 +53,6 @@ namespace Expedition {
             bool m_keyboardFocus;
             bool m_fullScreen;
             bool m_minimized;
+            bool m_shown;
     };
 }

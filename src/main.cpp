@@ -18,9 +18,6 @@ void close();
 // Game window
 Expedition::Window g_window;
 
-// Window Renderer
-SDL_Renderer* g_renderer;
-
 bool init() {
     // Initialization flag
     bool success = true;
@@ -37,19 +34,8 @@ bool init() {
 
         // Create window
         if (!g_window.init("Game Window", SCREEN_WIDTH, SCREEN_HEIGHT)) {
-            printf("ERROR: Window could not be created. SDL Error: %s\n", SDL_GetError());
+            printf("ERROR: Window initialization failed.");
             success = false;
-        } else {
-            // Initialize renderer
-            if (!g_window.createRenderer()) {
-                printf("ERROR: Renderer could not be created! SDL Error: %s\n", SDL_GetError());
-                success = false;
-            } else {
-                g_renderer = g_window.getRenderer();
-
-                // Initialize renderer color
-                SDL_SetRenderDrawColor(g_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-            }
         }
     }
 
@@ -89,16 +75,15 @@ int main (int argc, char* args[]) {
             // Only draw if window is not minimized
             if (!g_window.isMinimized()) {
                 // Clear screen
-                SDL_SetRenderDrawColor(g_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-                SDL_RenderClear(g_renderer);
+                g_window.clearScreen();
 
                 // Render scene
-                SDL_SetRenderDrawColor(g_renderer, 0xFF, 0x0, 0x0, 0xFF);
+                SDL_SetRenderDrawColor(g_window.getRenderer(), 0xFF, 0x0, 0x0, 0xFF);
                 SDL_Rect rect = {g_window.getWidth() / 4, g_window.getHeight() / 4, g_window.getWidth() / 2, g_window.getHeight() / 2};
-                SDL_RenderFillRect(g_renderer, &rect);
+                SDL_RenderFillRect(g_window.getRenderer(), &rect);
 
                 // Update screen
-                SDL_RenderPresent(g_renderer);
+                g_window.render();
             }
         }
     }
