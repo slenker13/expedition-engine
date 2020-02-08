@@ -1,6 +1,6 @@
 #include "Window.hpp"
 
-#include <SDL2/SDL.h>
+#include <SDL2/SDL_events.h>
 
 Expedition::Window::Window() {
     // Initialize window
