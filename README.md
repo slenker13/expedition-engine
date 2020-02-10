@@ -1,2 +1,2 @@
 # expedition-engine
-c++ game engine
+C++ SDL2 Game Engine
