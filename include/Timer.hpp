@@ -1,6 +1,10 @@
+#ifndef EXPEDITION_TIMER_HPP
+#define EXPEDITION_TIMER_HPP
+
 #include <stdint.h>
 
 namespace Expedition {
+    // Timer management class
     class Timer {
         public:
             // Init variables
@@ -31,3 +35,5 @@ namespace Expedition {
             bool m_started;
     };
 }
+
+#endif

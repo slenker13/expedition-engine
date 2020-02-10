@@ -1,10 +1,16 @@
+#ifndef EXPEDITION_WINDOW_HPP
+#define EXPEDITION_WINDOW_HPP
+
 #include <SDL2/SDL_render.h>
+#include <SDL2/SDL_events.h>
 
 #include <string>
 
 namespace Expedition {
+    // Wrapper class for SDL_Window
     class Window {
         public:
+            // Init variables
             Window();
 
             // Create window
@@ -56,3 +62,5 @@ namespace Expedition {
             bool m_shown;
     };
 }
+
+#endif
