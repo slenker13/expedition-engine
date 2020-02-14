@@ -17,13 +17,18 @@ Expedition::Window::Window() {
     m_height = 0;
 }
 
-bool Expedition::Window::init(std::string name, int width, int height) {
+bool Expedition::Window::init(std::string name, int width, int height, bool resizable) {
     // Success flag
     bool success = true;
 
     // Create window
     // TODO: Option of windowed/fullscreen? Fullscreen all the time?
-    m_window = SDL_CreateWindow(name.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+    if (resizable) {
+        m_window = SDL_CreateWindow(name.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+    } else {
+        m_window = SDL_CreateWindow(name.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN);
+    }
+    
     if (m_window == nullptr) {
         printf("ERROR: Window could not be created. SDL Error: %s\n", SDL_GetError());
         success = false;

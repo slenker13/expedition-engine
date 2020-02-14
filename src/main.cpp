@@ -41,7 +41,7 @@ bool init() {
         }
 
         // Create window
-        if (!g_window.init("Game Window", SCREEN_WIDTH, SCREEN_HEIGHT)) {
+        if (!g_window.init("Game Window", SCREEN_WIDTH, SCREEN_HEIGHT, false)) {
             printf("ERROR: Window initialization failed.");
             success = false;
         }
