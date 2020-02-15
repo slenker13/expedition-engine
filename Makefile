@@ -1,23 +1,26 @@
 CXX		  := g++
 CXX_FLAGS := -Wall
 
-BUILD		:= build
+BUILD	:= build
+OBJ		:= $(BUILD)/obj
 SRC		:= src
 INCLUDE	:= include
-LDFLAGS	:= 
+SRC_FILES	:= $(wildcard $(SRC)/*.cpp)
+OBJ_FILES	:= $(patsubst $(SRC)/%.cpp,$(OBJ)/%.o,$(SRC_FILES))
 
-LIBRARIES	:= -lSDL2 -lSDL2_image
-EXECUTABLE	:= expedition
+LIBRARY	:= libexpedition.a
 
 
-all: $(BUILD)/$(EXECUTABLE)
+$(BUILD)/$(LIBRARY): $(OBJ_FILES)
+	ar rcs $@ $^
 
-run: clean all
-	clear
-	./$(BUILD)/$(EXECUTABLE)
+$(OBJ)/%.o: $(SRC)/%.cpp | $(OBJ)
+	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -c -o $@ $<
 
-$(BUILD)/$(EXECUTABLE): $(SRC)/*.cpp
-	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) $(LDFLAGS) $^ -o $@ $(LIBRARIES)
+$(OBJ):
+	mkdir -p $@
 
+.PHONY: clean
 clean:
+	-rm -rf $(OBJ)
 	-rm $(BUILD)/*

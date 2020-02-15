@@ -1,11 +1,6 @@
 #ifndef EXPEDITION_HPP
 #define EXPEDITION_HPP
 
-// Expedition Engine classes
-#include "Texture.hpp"
-#include "Timer.hpp"
-#include "Window.hpp"
-
 namespace Expedition {
     // Initializes SDL systems
     bool init();
