@@ -29,3 +29,5 @@ void Expedition::Camera2D::updatePosition(int x, int y) {
         m_cameraRect.y = m_levelHeight - m_cameraRect.h;
     }
 }
+
+SDL_Rect Expedition::Camera2D::getCameraRect() { return m_cameraRect; }
