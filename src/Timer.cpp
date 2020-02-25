@@ -26,7 +26,7 @@ void Expedition::Timer::stop() {
     // Stop the timer
     m_started = false;
 
-    // Unpaude the timer
+    // Unpause the timer
     m_paused = false;
 
     // Clear tick variables

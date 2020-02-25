@@ -17,7 +17,7 @@ Expedition::Window::Window() {
     m_height = 0;
 }
 
-bool Expedition::Window::init(std::string name, int width, int height, bool resizable) {
+bool Expedition::Window::init(std::string name, int width, int height, bool resizable, bool vsync) {
     // Success flag
     bool success = true;
 
@@ -39,8 +39,11 @@ bool Expedition::Window::init(std::string name, int width, int height, bool resi
         m_height = height;
 
         // Create renderer
-        // TODO: VSYNC optional
-        m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+        if (vsync) {
+            m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+        } else {
+            m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
+        }
         if (m_renderer == nullptr) {
             printf("ERROR: Renderer could not be created. SDL Error: %s\n", SDL_GetError());
             SDL_DestroyWindow(m_window);
